@@ -1,3 +1,5 @@
+package Currency;
+
 public class CurrencyBase {
     protected int value;
     protected String name;

@@ -1,3 +1,6 @@
+package Tests;
+
+import Currency.Currency;
 import org.junit.Test;
 import org.junit.Assert;
 

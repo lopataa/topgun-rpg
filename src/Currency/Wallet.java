@@ -1,3 +1,5 @@
+package Currency;
+
 import java.util.HashMap;
 
 public class Wallet {

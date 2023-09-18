@@ -1,3 +1,5 @@
+import Items.Item;
+
 import java.util.ArrayList;
 
 public class Inventory {
@@ -24,7 +26,7 @@ public class Inventory {
     public void addItem(Item item) throws Inventory.InventoryFullException {
         if (this.getCurrentWeight() + item.getWeight() > this.getMaxWeight()) {
             throw new InventoryFullException(
-                    String.format("Item '%s' is too heavy to be added to the inventory", item.getName())
+                    String.format("Items.Item '%s' is too heavy to be added to the inventory", item.getName())
             );
         }
         this.items.add(item);

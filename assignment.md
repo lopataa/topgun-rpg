@@ -6,9 +6,9 @@ Dědičnost a polymorfizmus
 1.  Realizujte za využití OOP konzolový základ RPG soubojového a inventářového systému. Požadované třídy:
 
 -   Character (postava)
--   Weapon (zbraň)
--   Shield (štít)
--   Armor (brnění)
+-   Items.Weapon (zbraň)
+-   Items.Shield (štít)
+-   Items.Armor (brnění)
 -   Copper, Silver, Gold (druhy mincí)
 
 Přesná implementace je na vás, můžete (a dává to smysl) přidat další třídy, statické metody apod., vyžadováno je toto chování:
@@ -23,7 +23,7 @@ Přesná implementace je na vás, můžete (a dává to smysl) přidat další t
 
 -   V kombinaci s vlastnostmi postavy (síla, obratnost) dávají zbraně a štíty náhodný hod na útok a obranu a z nich vychází, zda a jak byla postava zraněna (udělejte postavě vhodné metody pro útok na někoho a obranu proti útoku. Automaticky se použijí brnění, které má na sobě, a to, co drží v rukou). Konkrétní herní mechanizmus si navrhněte sami
 
--   Postava umí udělat výpis inventáře ("*Golden Shield +1, Red coat, Silver necklace*")
+-   Postava umí udělat výpis inventáře ("*Golden Items.Shield +1, Red coat, Silver necklace*")
 
 -   Některé typy vybavení jsou stohovatelné (stackovatelné), tzn. ve výpisu budou shluknuty, např. "*Gold Coin (12)*". Musí je ale být možné vložit do inventáře stejně tak jako zbraň, jídlo nebo cokoli jiného.
 
