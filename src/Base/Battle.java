@@ -1,3 +1,5 @@
+package Base;
+
 import Items.Weapon;
 
 public class Battle {
@@ -40,7 +42,7 @@ public class Battle {
 
         Weapon weapon;
         if (attacker.getWeapon() == null)
-            weapon = new Weapon("Fists", 0.0f, 1);
+            weapon = new Weapon("Fists", "fists", 0.0f, 1);
         else
             weapon = attacker.getWeapon();
 
@@ -70,6 +72,8 @@ public class Battle {
 
         if (!defender.isAlive())
             System.out.printf("%s died!\n", defender.getName());
+        else
+            System.out.printf("%s has %d health left\n", defender.getName(), defender.getHealth());
 
         System.out.println();
         this.turn++;

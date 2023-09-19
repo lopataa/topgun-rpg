@@ -5,7 +5,7 @@ Dědičnost a polymorfizmus
 
 1.  Realizujte za využití OOP konzolový základ RPG soubojového a inventářového systému. Požadované třídy:
 
--   Character (postava)
+-   Base.Character (postava)
 -   Items.Weapon (zbraň)
 -   Items.Shield (štít)
 -   Items.Armor (brnění)

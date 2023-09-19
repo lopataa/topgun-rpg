@@ -1,3 +1,5 @@
+package Base;
+
 import Items.Item;
 
 import java.util.ArrayList;
@@ -30,6 +32,15 @@ public class Inventory {
             );
         }
         this.items.add(item);
+    }
+
+    public <T extends Item> T getItem(String id) {
+        for (Item i : this.items) {
+            if (i.getId().equals(id)) {
+                return (T) i;
+            }
+        }
+        return null;
     }
 
     public ArrayList<Item> getItems() {

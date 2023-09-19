@@ -1,15 +1,25 @@
 package Items;
 
-public class StackableItem extends Item {
-    private final int quantity;
+import Base.Character;
 
-    public StackableItem(String name, float weight, int quantity) {
-        super(name, weight);
+public class StackableItem extends Item {
+    private int quantity;
+
+    public StackableItem(String name, String id, float weight, int quantity) {
+        super(name, id, weight);
         this.quantity = quantity;
     }
 
     public int getQuantity() {
         return this.quantity;
+    }
+
+    public void removeQuantity(int quantity) {
+        this.quantity -= quantity;
+    }
+
+    public void addQuantity(int quantity) {
+        this.quantity += quantity;
     }
 
     @Override

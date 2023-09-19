@@ -1,3 +1,5 @@
+package Base;
+
 import Currency.Wallet;
 import Items.Armor;
 import Items.Item;
@@ -35,7 +37,6 @@ public class Character {
         random.setSeed(name.hashCode());
 
 
-
         this.max_health = this.randInt(random, 10, 100);
         this.dexterity = this.randInt(random, 0, 50);
         float max_weight = this.randInt(random, 10, 50);
@@ -48,7 +49,11 @@ public class Character {
 
     public void info() {
         System.out.printf("Character - %s:\n", this.name);
-        System.out.printf("Left Hand: %s; Right Hand: %s; Items.Armor: %s\n", this.equippedShield.getName(), this.equippedWeapon.getName(), this.equippedArmor.getName());
+        System.out.printf(
+                "Left Hand: %s; Right Hand: %s; Armor: %s\n",
+                this.equippedShield != null ? this.equippedShield.getName() : "None",
+                this.equippedWeapon != null ? this.equippedWeapon.getName() : "None",
+                this.equippedArmor != null ? this.equippedArmor.getName() : "None");
         System.out.printf("- Health: %d / %d %s\n", this.getHealth(), this.getMaxHealth(), this.isAlive() ? "" : "(dead)");
         System.out.printf("- Dexterity: %d\n", this.dexterity);
         System.out.printf("- Weight: %.2f / %.2f\n", this.inventory.getCurrentWeight(), this.inventory.getMaxWeight());
@@ -78,7 +83,6 @@ public class Character {
         return (int) (damage * multiplier) - damage;
     }
 
-
     public int getMaxHealth() {
         return this.max_health;
     }
@@ -93,6 +97,18 @@ public class Character {
 
     public void takeDamage(int damage) {
         this.health -= damage;
+    }
+
+    public void heal(int amount, boolean canExceedMaxHealth) {
+        if (canExceedMaxHealth) {
+            this.health += amount;
+        } else {
+            this.health = Math.min(this.health + amount, this.max_health);
+        }
+    }
+
+    public void heal(int amount) {
+        this.heal(amount, false);
     }
 
     public int getDexterity() {

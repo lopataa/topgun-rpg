@@ -3,8 +3,8 @@ package Items;
 public class Shield extends Item {
     private final int blockChance;
 
-    public Shield(String name, float weight, int blockChance) {
-        super(name, weight);
+    public Shield(String name, String id, float weight, int blockChance) {
+        super(name, id, weight);
         this.blockChance = blockChance;
     }
 
