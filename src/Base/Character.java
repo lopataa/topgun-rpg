@@ -1,6 +1,5 @@
 package Base;
 
-import Currency.Wallet;
 import Items.Armor;
 import Items.Item;
 import Items.Shield;
@@ -20,16 +19,12 @@ public class Character {
     public Armor equippedArmor;
     public Shield equippedShield;
 
-    public Wallet wallet;
-
     private int randInt(Random random, int min, int max) {
         return random.nextInt((max - min) + 1) + min;
     }
 
     public Character(String name) {
         this.name = name;
-
-        this.wallet = new Wallet();
 
         // setup random stuff
         Random random = new Random();
@@ -56,19 +51,24 @@ public class Character {
                 this.equippedArmor != null ? this.equippedArmor.getName() : "None");
         System.out.printf("- Health: %d / %d %s\n", this.getHealth(), this.getMaxHealth(), this.isAlive() ? "" : "(dead)");
         System.out.printf("- Dexterity: %d\n", this.dexterity);
+        System.out.printf("- Money: $%d\n", this.getMoney());
         System.out.printf("- Weight: %.2f / %.2f\n", this.inventory.getCurrentWeight(), this.inventory.getMaxWeight());
         System.out.printf("- Inventory: [%s]\n\n", this.inventory);
     }
 
-    public void equip(Item item) throws UnownedItemException {
+    public void equip(Item item) throws UnownedItemException, BothHandsOccupiedException {
         if (!this.inventory.getItems().contains(item)) {
             throw new UnownedItemException("Items.Item '" + item.getName() + "' is not owned by this character");
         }
         if (item instanceof Weapon) {
+            if (((Weapon) item).requiresTwoHands() && this.equippedShield != null)
+                throw new BothHandsOccupiedException("Cannot equip a two-handed weapon while a shield is equipped");
             this.equippedWeapon = (Weapon) item;
         } else if (item instanceof Armor) {
             this.equippedArmor = (Armor) item;
         } else if (item instanceof Shield) {
+            if (this.equippedWeapon != null && this.equippedWeapon.requiresTwoHands())
+                throw new BothHandsOccupiedException("Cannot equip a shield while a two-handed weapon is equipped");
             this.equippedShield = (Shield) item;
         }
     }
@@ -81,6 +81,10 @@ public class Character {
         // random number between 1 and 2
         float multiplier = (float) (Math.random() * (2 - 1)) + 1.1f;
         return (int) (damage * multiplier) - damage;
+    }
+
+    public int getMoney() {
+        return this.inventory.getMoney();
     }
 
     public int getMaxHealth() {
@@ -141,6 +145,12 @@ public class Character {
 
     public static class UnownedItemException extends Exception {
         public UnownedItemException(String message) {
+            super(message);
+        }
+    }
+
+    public static class BothHandsOccupiedException extends Exception {
+        public BothHandsOccupiedException(String message) {
             super(message);
         }
     }

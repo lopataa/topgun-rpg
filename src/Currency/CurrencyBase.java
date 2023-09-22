@@ -1,18 +1,20 @@
 package Currency;
 
-public class CurrencyBase {
+public class CurrencyBase extends Items.StackableItem {
     protected int value;
     protected String name;
 
+    public int getBaseValue() {
+        return this.value;
+    }
+
     public int getValue() {
-        return value;
+        return this.value * this.getQuantity();
     }
 
-    public String getName() {
-        return name;
-    }
+    public CurrencyBase(int value, String name, String id, float weight, int quantity) {
+        super(name, id, weight, quantity);
 
-    public CurrencyBase(int value, String name) {
         this.value = value;
         this.name = name;
     }

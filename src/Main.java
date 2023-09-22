@@ -4,20 +4,33 @@ import Items.Armor;
 import Items.Shield;
 import Items.Special.LetterFromMom;
 import Items.Weapon;
+import Base.Battle;
 
 public class Main {
-    public static void main(String[] args) throws Character.UnownedItemException, Inventory.InventoryFullException {
+    public static void main(String[] args) throws Character.UnownedItemException, Inventory.InventoryFullException, Character.BothHandsOccupiedException {
         System.out.println("Hello world!\n");
 
         Character attacker = new Character("peter");
         Character defender = new Character("paul");
 
-        System.out.printf("%s found a letter!\n", attacker.getName());
-        attacker.inventory.addItem(new LetterFromMom());
-        attacker.inventory.getItem("letter_from_mom").use(attacker);
+        Weapon weapon = new Weapon("Sword", "sword", 10, 10);
 
+        attacker.inventory.addItem(weapon);
+        attacker.equip(weapon);
+
+        Armor armor = new Armor("Chainmail", "chainmail_armor", 10, 9);
+        defender.inventory.addItem(armor);
+        defender.equip(armor);
+
+        Battle battle = new Battle(attacker, defender, new Items.Item[]{
+            new Currency.Gold(2),
+        });
+
+        attacker.inventory.addItem(new Currency.Gold(10));
         attacker.info();
 
+        battle.commence(false, true);
 
+        attacker.info();
     }
 }
